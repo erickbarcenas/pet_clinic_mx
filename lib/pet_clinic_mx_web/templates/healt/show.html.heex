@@ -1,0 +1,33 @@
+<h1>Show Healt</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @healt.name %>
+  </li>
+
+  <li>
+    <strong>Age:</strong>
+    <%= @healt.age %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @healt.email %>
+  </li>
+
+  <li>
+    <strong>Specialities:</strong>
+    <%= @healt.specialities %>
+  </li>
+
+  <li>
+    <strong>Sex:</strong>
+    <%= @healt.sex %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.healt_path(@conn, :edit, @healt) %></span> |
+<span><%= link "Back", to: Routes.healt_path(@conn, :index) %></span>
