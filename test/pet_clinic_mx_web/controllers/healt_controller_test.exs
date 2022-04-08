@@ -3,8 +3,20 @@ defmodule PetClinicMxWeb.HealtControllerTest do
 
   import PetClinicMx.PetHealthExpertFixtures
 
-  @create_attrs %{age: 42, email: "some email", name: "some name", sex: "some sex", specialities: "some specialities"}
-  @update_attrs %{age: 43, email: "some updated email", name: "some updated name", sex: "some updated sex", specialities: "some updated specialities"}
+  @create_attrs %{
+    age: 42,
+    email: "some email",
+    name: "some name",
+    sex: "some sex",
+    specialities: "some specialities"
+  }
+  @update_attrs %{
+    age: 43,
+    email: "some updated email",
+    name: "some updated name",
+    sex: "some updated sex",
+    specialities: "some updated specialities"
+  }
   @invalid_attrs %{age: nil, email: nil, name: nil, sex: nil, specialities: nil}
 
   describe "index" do

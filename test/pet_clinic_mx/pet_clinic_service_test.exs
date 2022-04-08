@@ -36,7 +36,13 @@ defmodule PetClinicMx.PetClinicServiceTest do
 
     test "update_pet/2 with valid data updates the pet" do
       pet = pet_fixture()
-      update_attrs = %{age: 43, name: "some updated name", sex: "some updated sex", type: "some updated type"}
+
+      update_attrs = %{
+        age: 43,
+        name: "some updated name",
+        sex: "some updated sex",
+        type: "some updated type"
+      }
 
       assert {:ok, %Pet{} = pet} = PetClinicService.update_pet(pet, update_attrs)
       assert pet.age == 43

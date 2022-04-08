@@ -21,7 +21,6 @@ defmodule PetClinicMx.PetClinicService do
     Repo.all(Pet)
   end
 
-
   @doc """
   Returns the list of pets by type.
   ## Examples

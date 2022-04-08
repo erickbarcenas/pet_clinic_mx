@@ -4,7 +4,12 @@ defmodule PetClinicMxWeb.PetControllerTest do
   import PetClinicMx.PetClinicServiceFixtures
 
   @create_attrs %{age: 42, name: "some name", sex: "some sex", type: "some type"}
-  @update_attrs %{age: 43, name: "some updated name", sex: "some updated sex", type: "some updated type"}
+  @update_attrs %{
+    age: 43,
+    name: "some updated name",
+    sex: "some updated sex",
+    type: "some updated type"
+  }
   @invalid_attrs %{age: nil, name: nil, sex: nil, type: nil}
 
   describe "index" do
