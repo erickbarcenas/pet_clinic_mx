@@ -21,6 +21,17 @@ defmodule PetClinicMx.PetClinicService do
     Repo.all(Pet)
   end
 
+
+  @doc """
+  Returns the list of pets by type.
+  ## Examples
+      iex> list_pets_by_type(type)
+      [%Pet{}, ...]
+  """
+  def list_pets_by_type(type) do
+    Repo.all(from p in Pet, where: p.type == ^type)
+  end
+
   @doc """
   Gets a single pet.
 

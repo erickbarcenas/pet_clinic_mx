@@ -1,33 +1,33 @@
-<h1>Show Healt</h1>
-
 <ul>
+    <li>
+      <section class='flexBoxContainer'>
+        <div class='leftFlexBox'>
+          <div class="nosotros_card">
+            <h3 class="nosotros_card_name"> <%= @healt.name %>, <%= @healt.age %> </h3>
+              <img  class={"nosotros_profile"} width="500" height="350" src={"/images/veterinary_symbol.png"} />
 
-  <li>
-    <strong>Name:</strong>
-    <%= @healt.name %>
-  </li>
 
-  <li>
-    <strong>Age:</strong>
-    <%= @healt.age %>
-  </li>
-
-  <li>
-    <strong>Email:</strong>
-    <%= @healt.email %>
-  </li>
-
-  <li>
-    <strong>Specialities:</strong>
-    <%= @healt.specialities %>
-  </li>
-
-  <li>
-    <strong>Sex:</strong>
-    <%= @healt.sex %>
-  </li>
-
+              <div class="container">     
+                <span class="nosotros_card_years_old"></span>
+                  <ul class="nosotros_card_skills">
+                    <li> <%= @healt.specialities %> </li>
+                    <li> <%= @healt.sex %> </li>
+                    <li> <%= @healt.email %> </li>
+                  </ul>
+                  <div class="nosotros_card_description">
+                    <span><%= link "Edit", to: Routes.healt_path(@conn, :edit, @healt) %></span> |
+                    <span><%= link "Back", to: Routes.healt_path(@conn, :index) %></span>
+                  </div>  
+                  <%# ---
+                  <div class="nosotros_card_description">
+                    una pequeña seccion de acerca de ustedes, es decir, un parrafo de algo acerca de ustedes
+                  </div>  
+                  --- %>
+              </div>
+          </div>
+        </div>
+        <%# --- <div class='rightFlexBox'></div> --- %>
+      </section>
+    </li>
 </ul>
 
-<span><%= link "Edit", to: Routes.healt_path(@conn, :edit, @healt) %></span> |
-<span><%= link "Back", to: Routes.healt_path(@conn, :index) %></span>

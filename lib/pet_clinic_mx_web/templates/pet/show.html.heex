@@ -1,28 +1,32 @@
-<h1>Show Pet</h1>
-
 <ul>
+    <li>
+      <section class='flexBoxContainer'>
+        <div class='leftFlexBox'>
+          <div class="nosotros_card">
+            <h3 class="nosotros_card_name"> <%= @pet.name %>, <%= @pet.age %> </h3>
+              <img  class={"nosotros_profile"} width="500" height="350" src={"/images/veterinary_symbol.png"} />
 
-  <li>
-    <strong>Name:</strong>
-    <%= @pet.name %>
-  </li>
 
-  <li>
-    <strong>Age:</strong>
-    <%= @pet.age %>
-  </li>
-
-  <li>
-    <strong>Type:</strong>
-    <%= @pet.type %>
-  </li>
-
-  <li>
-    <strong>Sex:</strong>
-    <%= @pet.sex %>
-  </li>
-
+              <div class="container">     
+                <span class="nosotros_card_years_old"></span>
+                  <ul class="card_skills">
+                    <li> <%= @pet.type %> </li>
+                    <li> <%= @pet.sex %> </li>
+                  </ul>
+                  <div class="nosotros_card_description">
+                    <span><%= link "Edit", to: Routes.pet_path(@conn, :edit, @pet) %></span> |
+                    <span><%= link "Back", to: Routes.pet_path(@conn, :index) %></span>
+                  </div>  
+                  <%# ---
+                  <div class="nosotros_card_description">
+                    una pequeña seccion de acerca de ustedes, es decir, un parrafo de algo acerca de ustedes
+                  </div>  
+                  --- %>
+              </div>
+          </div>
+        </div>
+        <%# --- <div class='rightFlexBox'></div> --- %>
+      </section>
+    </li>
 </ul>
 
-<span><%= link "Edit", to: Routes.pet_path(@conn, :edit, @pet) %></span> |
-<span><%= link "Back", to: Routes.pet_path(@conn, :index) %></span>
