@@ -11,10 +11,111 @@
     href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;900&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="static/css/style.css">
-  <link rel="stylesheet" href="static/css/medias.css">
-  <title>Inicio</title>
+  <title>Ecto</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      /*color: #fff;*/
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    /** ====================================
+      *          🔰 CONFIG
+      ==================================== **/
+
+    :root{
+        --bg-page: #4A90E2;
+        --font-family: 'Roboto Condensed';
+    }
+
+
+
+    body, html {
+      height: 100%;
+      background-color: var(--bg-page);
+      font-family: var(--font-family);
+      font-size: 24px;
+      overflow-x: hidden;
+    }
+
+    main h1 {
+      margin: 1rem auto 0;
+      width: 60%;
+      color: white;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    main h2 {
+      margin: 1rem auto 0;
+      width: 60%;
+      color: white;
+      font-size: 1rem;
+    }
+
+    footer {
+      
+      font-size: .5rem;
+      text-align: center;
+      margin: 1rem auto;
+      
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .code {
+      width: 1024px; 
+      height: 420px; 
+      border:0; 
+      transform: scale(1); 
+      overflow:hidden;
+    }
+    @media screen and (max-width: 480px) {
+      main h1 {
+        font-size: 1rem;
+        width: 100%;
+        margin: 1rem 0;
+      }
+      main h2 {
+        margin: 1rem 2rem;
+        width: 70%;
+        color: white;
+        font-size: 0.7rem;
+      }
+
+      .code {
+        width: 320px; 
+        height: 420px; 
+        border:0; 
+        transform: scale(1); 
+        overflow:hidden;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+
+      main h2 {
+        margin: 1rem auto 0;
+        width: 45%;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .code {
+        width: 1324px; 
+        height: 420px; 
+        border:0; 
+        transform: scale(1); 
+        overflow:hidden;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- HEADER -->
@@ -22,20 +123,73 @@
   </header>
 
   <main>
-    <h2> Ejemplo </h2>
+    <h1>Ecto basic operations </h1>
+
+    <h2> Crear 1 pet </h2>
     <iframe
-        src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C0%29&t=seti&wt=none&l=elixir&width=1046&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=iex%253E%2520topics%2520%253D%2520%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%250Aiex%253E%2520Enum.each%28topics%252C%2520fn%28s%29%2520-%253E%2520IO.puts%28s%29%2520end%29%250APostgreSQL%250ANeo4j%250ACypher%250ABolt.Sips%250APhoenix%250A%253Aok%250A"
-        style="width: 1024px; height: 473px; border:0; transform: scale(1); overflow:hidden;"
-        sandbox="allow-scripts allow-same-origin">
+      src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C0%29&t=material&wt=none&l=elixir&width=680&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=iex%253E%2520topics%2520%253D%2520%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%250Aiex%253E%2520Enum.each%28topics%252C%2520fn%28s%29%2520-%253E%2520IO.puts%28s%29%2520end%29%250APostgreSQL%250ANeo4j%250ACypher%250ABolt.Sips%250APhoenix%250A%253Aok%250A"
+      class="code"
+      >
     </iframe>
     <br>
-    <h2> Ejemplo </h2>
+    <!---->
+    <h2> Consultar todos los pets </h2>
     <iframe
-        src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C0%29&t=seti&wt=none&l=elixir&width=1046&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=iex%253E%2520topics%2520%253D%2520%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%250Aiex%253E%2520Enum.each%28topics%252C%2520fn%28s%29%2520-%253E%2520IO.puts%28s%29%2520end%29%250APostgreSQL%250ANeo4j%250ACypher%250ABolt.Sips%250APhoenix%250A%253Aok%250A"
-        style="width: 1024px; height: 473px; border:0; transform: scale(1); overflow:hidden;"
-        sandbox="allow-scripts allow-same-origin">
+      src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C0%29&t=material&wt=none&l=elixir&width=680&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=iex%253E%2520topics%2520%253D%2520%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%250Aiex%253E%2520Enum.each%28topics%252C%2520fn%28s%29%2520-%253E%2520IO.puts%28s%29%2520end%29%250APostgreSQL%250ANeo4j%250ACypher%250ABolt.Sips%250APhoenix%250A%253Aok%250A"
+      class="code"
+      >
     </iframe>
     <br>
+
+    <!---->
+    <h2> Consultar todos los pets </h2>
+    <iframe
+      src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C0%29&t=material&wt=none&l=elixir&width=680&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=iex%253E%2520topics%2520%253D%2520%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%250Aiex%253E%2520Enum.each%28topics%252C%2520fn%28s%29%2520-%253E%2520IO.puts%28s%29%2520end%29%250APostgreSQL%250ANeo4j%250ACypher%250ABolt.Sips%250APhoenix%250A%253Aok%250A"
+      class="code"
+      >
+    </iframe>
+    <br>
+
+
+    <!---->
+    <h2> Consultar pets con más de un criterio (Repo.all), usando también select y order_by </h2>
+    <iframe
+      src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C0%29&t=material&wt=none&l=elixir&width=680&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=iex%253E%2520topics%2520%253D%2520%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%250Aiex%253E%2520Enum.each%28topics%252C%2520fn%28s%29%2520-%253E%2520IO.puts%28s%29%2520end%29%250APostgreSQL%250ANeo4j%250ACypher%250ABolt.Sips%250APhoenix%250A%253Aok%250A"
+      class="code"
+      >
+    </iframe>
+    <br>
+
+    <!---->
+    <h2> Modificar en BD 1 atributo de 1 pet (consultar, crear changeset, actualizar)</h2>
+    <iframe
+      src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C0%29&t=material&wt=none&l=elixir&width=680&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=iex%253E%2520topics%2520%253D%2520%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%250Aiex%253E%2520Enum.each%28topics%252C%2520fn%28s%29%2520-%253E%2520IO.puts%28s%29%2520end%29%250APostgreSQL%250ANeo4j%250ACypher%250ABolt.Sips%250APhoenix%250A%253Aok%250A"
+      class="code"
+      >
+    </iframe>
+    <br>
+
+    <!---->
+    <h2> Corroborar el cambio anterior usando Repo.get!</h2>
+    <iframe
+      src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C0%29&t=material&wt=none&l=elixir&width=680&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=iex%253E%2520topics%2520%253D%2520%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%250Aiex%253E%2520Enum.each%28topics%252C%2520fn%28s%29%2520-%253E%2520IO.puts%28s%29%2520end%29%250APostgreSQL%250ANeo4j%250ACypher%250ABolt.Sips%250APhoenix%250A%253Aok%250A"
+      class="code"
+      >
+    </iframe>
+    <br>
+
+    <!---->
+    <h2> Borrar un pet</h2>
+    <iframe
+      src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C0%29&t=material&wt=none&l=elixir&width=680&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=iex%253E%2520topics%2520%253D%2520%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%255B%2522PostgreSQL%2522%252C%2520%2522Neo4j%2522%252C%2520%2522Cypher%2522%252C%2520%2522Bolt.Sips%2522%252C%2520%2522Phoenix%2522%255D%250A%250Aiex%253E%2520Enum.each%28topics%252C%2520fn%28s%29%2520-%253E%2520IO.puts%28s%29%2520end%29%250APostgreSQL%250ANeo4j%250ACypher%250ABolt.Sips%250APhoenix%250A%253Aok%250A"
+      class="code"
+      >
+    </iframe>
+    <br>
+
+    <footer>
+      <a href="https://github.com/erickbarcenas/pet_clinic_mx">Made with ❤️ by Erick Bárcenas</a>
+    </footer>
   </main>
 </body>
 </html>
