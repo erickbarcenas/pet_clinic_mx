@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /*color: #fff;*/
+  font-family: 'Open Sans', sans-serif;
+}
+
+/** ====================================
+   *          🔰 CONFIG
+  ==================================== **/
+
+:root{
+    --bg-page: #4A90E2;
+    --font-family: 'Roboto Condensed';
+}
+
+
+
+body, html {
+  height: 100%;
+  background-color: var(--bg-page);
+  font-family: var(--font-family);
+  font-size: 24px;
+}
