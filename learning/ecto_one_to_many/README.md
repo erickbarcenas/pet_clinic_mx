@@ -691,13 +691,14 @@ end
 
 ```
 ## 6. Asociar preferred_expert con pets (mandar iex + resultado)
-    6.1 Consultar 2 pets con la asociación hacia preferred_expert precargada.
-    ```elixir
+### 6.1 Consultar 2 pets con la asociación hacia preferred_expert precargada.
+
+```elixir
     iex> with_preferred_experd = Repo.all(from p in Pet, where: p.preferred_expert_id > 0, select: [p.name])
     []
-    ```
+```
 
-    ```elixir
+```elixir
     iex>  chocolata = Repo.get_by(Pet, name: "chocolata") |> Repo.preload(:preferred_expert)
     %PetClinicMx.PetClinicService.Pet{
     __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
@@ -713,9 +714,9 @@ end
     type: "dog",
     updated_at: ~N[2022-04-20 23:24:50]
     }
-    ```
+```
 
-    ```elixir
+```elixir
     iex> phoenix = Repo.get_by(Pet, name: "phoenix") |> Repo.preload(:preferred_expert) 
     %PetClinicMx.PetClinicService.Pet{
     __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
@@ -731,54 +732,54 @@ end
     type: "cat",
     updated_at: ~N[2022-04-20 23:59:07]
     }
-    ```
+```
 
 
 
     6.2 Usando put_assoc, asociar c/u de esos pets con algún preferred_expert.
 
 
-    ```elixir
+```elixir
     iex> import Ecto.Changeset
     Ecto.Changeset
-    ```
+```
 
-    ```elixir
+```elixir
     iex> phoenix = Repo.get_by(Pet, name: "phoenix") |> Repo.preload(:preferred_expert)
     iex> erick = Repo.get_by(Healt, name: "Erick")
     iex> chset = phoenix |> change() |> put_assoc(:preferred_expert, erick)
     iex> Repo.update(chset)
-    ```
+```
 
-    ```elixir
+```elixir
     iex> simba = Repo.get_by(Pet, name: "Simba") |> Repo.preload(:preferred_expert)
     iex> erick = Repo.get_by(Healt, name: "Erick")
     iex> chset = simba |> change() |> put_assoc(:preferred_expert, erick)
     iex> Repo.update(chset)
-    ```
+```
 
-    ```elixir
+```elixir
     iex> leo = Repo.get_by(Pet, name: "Leo") |> Repo.preload(:preferred_expert)
     iex> erick = Repo.get_by(Healt, name: "Erick")
     iex> chset = leo |> change() |> put_assoc(:preferred_expert, erick)
     iex> Repo.update(chset)
-    ```
+```
 
-    ```elixir
+```elixir
     iex> frog = Repo.get_by(Pet, name: "frog") |> Repo.preload(:preferred_expert)
     iex> erick = Repo.get_by(Healt, name: "Erick")
     iex> chset = frog |> change() |> put_assoc(:preferred_expert, erick)
     iex> Repo.update(chset)
-    ```
+```
 
-    ```elixir
+```elixir
     iex> lucas = Repo.get_by(Pet, name: "Lucas") |> Repo.preload(:preferred_expert)
     iex> erick = Repo.get_by(Healt, name: "Erick")
     iex> chset = lucas |> change() |> put_assoc(:preferred_expert, erick)
     iex> Repo.update(chset)
-    ```
+```
 
-    ```elixir
+```elixir
     iex> ecto = Repo.get_by(Pet, name: "ecto") |> Repo.preload(:preferred_expert)
     iex> pao = Repo.get_by(Healt, name: "Pao")
     iex> chset = ecto |> change() |> put_assoc(:preferred_expert, pao)
@@ -786,16 +787,16 @@ end
     ```
 
 
-    ```elixir
+```elixir
     iex> chocolata = Repo.get_by(Pet, name: "chocolata") |> Repo.preload(:preferred_expert)
     iex> pao = Repo.get_by(Healt, name: "Pao")
     iex> chset = chocolata |> change() |> put_assoc(:preferred_expert, pao)
     iex> Repo.update(chset)
-    ```
+```
 
     6.3 Consultar el preferred_expert anterior, precargando la asociación con pets.
 
-    ```elixir
+```elixir
     iex> erick = Repo.get_by(Healt, name: "Erick") |> Repo.preload(:patients)
     %PetClinicMx.PetHealthExpert.Healt{
     __meta__: #Ecto.Schema.Metadata<:loaded, "healt_expert">,
@@ -881,9 +882,9 @@ end
     updated_at: ~N[2022-04-07 22:58:39]
     }
 
-    ```
+```
 
-    ```elixir
+```elixir
     iex> pao = Repo.get_by(Healt, name: "Pao") |> Repo.preload(:patients)
     %PetClinicMx.PetHealthExpert.Healt{
     __meta__: #Ecto.Schema.Metadata<:loaded, "healt_expert">,
@@ -926,7 +927,7 @@ end
     specialities: "dog",
     updated_at: ~N[2022-04-07 22:59:01]
     }
-    ```
+```
 
 ## 7. Leer la documentación de Ecto.Changeset. La parte principal y las funciones cast y change.
 
