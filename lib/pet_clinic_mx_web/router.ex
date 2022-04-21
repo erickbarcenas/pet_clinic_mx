@@ -22,6 +22,7 @@ defmodule PetClinicMxWeb.Router do
     get "/pets/by_type/:type", PetController, :index_by_type
     resources "/pets", PetController
     resources "/healt_expert", HealtController
+    resources "/owners", OwnerController
   end
 
   # Other scopes may use custom stacks.

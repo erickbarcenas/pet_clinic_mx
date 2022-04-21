@@ -1,7 +1,7 @@
 defmodule PetClinicMx.Repo.Migrations.CreatePets do
   use Ecto.Migration
 
-  def change do
+  def up do
     create table(:pets) do
       add :name, :string
       add :age, :integer
@@ -10,5 +10,9 @@ defmodule PetClinicMx.Repo.Migrations.CreatePets do
 
       timestamps()
     end
+  end
+
+  def down do
+    drop(table(:pets))
   end
 end

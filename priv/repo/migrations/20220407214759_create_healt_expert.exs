@@ -1,7 +1,7 @@
 defmodule PetClinicMx.Repo.Migrations.CreateHealtExpert do
   use Ecto.Migration
 
-  def change do
+  def up do
     create table(:healt_expert) do
       add :name, :string
       add :age, :integer
@@ -11,5 +11,9 @@ defmodule PetClinicMx.Repo.Migrations.CreateHealtExpert do
 
       timestamps()
     end
+  end
+
+  def down do
+    drop(table(:healt_expert))
   end
 end

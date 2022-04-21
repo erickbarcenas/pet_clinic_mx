@@ -8,6 +8,9 @@ defmodule PetClinicMx.PetClinicService.Pet do
     field :sex, :string
     field :type, :string
 
+    belongs_to(:owner, PetClinicMx.OwnerService.Owner, foreign_key: :owner_id)
+    # belongs_to(:preferred_expert, PetClinicMx.PetHealthExpert.Healt, foreign_key: :preferred_expert_id)  
+
     timestamps()
   end
 

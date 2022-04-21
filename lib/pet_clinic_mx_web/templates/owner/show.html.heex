@@ -1,0 +1,28 @@
+<h1>Show Owner</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @owner.name %>
+  </li>
+
+  <li>
+    <strong>Age:</strong>
+    <%= @owner.age %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @owner.email %>
+  </li>
+
+  <li>
+    <strong>Phone num:</strong>
+    <%= @owner.phone_num %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.owner_path(@conn, :edit, @owner) %></span> |
+<span><%= link "Back", to: Routes.owner_path(@conn, :index) %></span>
