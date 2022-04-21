@@ -1,5 +1,8 @@
 # Ecto One To Many
 
+![Calculator](https://github.com/erickbarcenas/pet_clinic_mx/tree/main/learning/ecto_one_to_many/assets/schema.png)
+
+
 ## 1. Usando generadores, crear Owner (name, age, email, phone_num).
 
 ```elixir
