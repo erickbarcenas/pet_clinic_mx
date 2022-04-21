@@ -8,7 +8,7 @@ defmodule PetClinicMx.OwnerService.Owner do
     field :name, :string
     field :phone_num, :string
     
-    has_many(:pets, PetClinicMx.PetClinicService.Pet)
+    has_many(:pets, PetClinicMx.PetClinicService.Pet, foreign_key: :owner_id)
 
     timestamps()
   end

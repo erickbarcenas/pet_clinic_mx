@@ -114,7 +114,6 @@ iex> Repo.insert(%Owner{age: 25, email: "bob@bunsan.io", name: "Bob", phone_num:
 ## 3. Agregar la relación entre Pet y Owner (pet.owner y owner.pets). Modelo y migración.
 
 
-
 ```elixir
 iex> mix ecto.gen.migration relation_owner_with_pets
 * creating priv/repo/migrations/20220420172007_relation_owner_with_pets.exs
@@ -529,15 +528,444 @@ iex> chset = ecto |> change() |> put_assoc(:owner, daniel)
 iex> Repo.update(chset)
 ```
 
-## 5. Repetir las instrucciones del punto 3, pero para Pet y HelthExpert (healthexpert.patients, pet.preferred_expert).
+### 4.3 Consultar el owner anterior, precargando la asociación con pets.
 
-## 6. Repetir el punto 4 pero para Pet y HelthExpert.
+```elixir
+iex> erick = Repo.get_by(Owner, name: "erick") |> Repo.preload(:pets)
+%PetClinicMx.OwnerService.Owner{
+  __meta__: #Ecto.Schema.Metadata<:loaded, "owners">,
+  age: 23,
+  email: "erick.barcenas@bunsan.io",
+  id: 1, 
+  inserted_at: ~N[2022-04-20 21:48:08],
+  name: "erick",
+  pets: [
+    %PetClinicMx.PetClinicService.Pet{
+      __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+      age: 5,
+      id: 4,
+      inserted_at: ~N[2022-04-07 22:56:36],
+      name: "Simba",
+      owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+      owner_id: 1,
+      sex: "male",
+      type: "snake",
+      updated_at: ~N[2022-04-21 00:31:16]
+    },
+    %PetClinicMx.PetClinicService.Pet{
+      __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+      age: 7,
+      id: 5,
+      inserted_at: ~N[2022-04-07 22:56:58],
+      name: "Leo",
+      owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+      owner_id: 1,
+      sex: "male",
+      type: "lizard",
+      updated_at: ~N[2022-04-21 00:47:05]
+    },
+    %PetClinicMx.PetClinicService.Pet{
+      __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+      age: 3,
+      id: 6,
+      inserted_at: ~N[2022-04-07 22:57:13],
+      name: "frog",
+      owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+      owner_id: 1,
+      sex: "male",
+      type: "dog",
+      updated_at: ~N[2022-04-21 00:47:25]
+    }
+  ],
+  phone_num: "+5212284806275",
+  updated_at: ~N[2022-04-20 21:48:08]
+}
+```
 
+```elixir
+iex> daniel = Repo.get_by(Owner, name: "Daniel") |> Repo.preload(:pets)
+%PetClinicMx.OwnerService.Owner{
+  __meta__: #Ecto.Schema.Metadata<:loaded, "owners">,
+  age: 25,
+  email: "daniel@bunsan.io",
+  id: 2,
+  inserted_at: ~N[2022-04-20 21:49:40],
+  name: "Daniel",
+  pets: [
+    %PetClinicMx.PetClinicService.Pet{
+      __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+      age: 3,
+      id: 7,
+      inserted_at: ~N[2022-04-07 22:57:27],
+      name: "Lucas",
+      owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+      owner_id: 2,
+      sex: "female",
+      type: "cat",
+      updated_at: ~N[2022-04-21 00:48:25]
+    },
+    %PetClinicMx.PetClinicService.Pet{
+      __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+      age: 3,
+      id: 9,
+      inserted_at: ~N[2022-04-20 13:29:31],
+      name: "ecto",
+      owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+      owner_id: 2,
+      sex: "male",
+      type: "cat",
+      updated_at: ~N[2022-04-21 00:48:41]
+    }
+  ],
+  phone_num: "+5215613558752",
+  updated_at: ~N[2022-04-20 21:49:40]
+}
+```
+## 5. Agregar la relación entre Pet y HelthExpert (healthexpert.patients, pet.preferred_expert). Modelo y migración.
+```elixir
+iex> mix ecto.gen.migration relation_healt_expert_with_patients
+* creating priv/repo/migrations/20220421005612_relation_healt_expert_with_patients.exs
+```
+
+```elixir
+defmodule PetClinicMx.Repo.Migrations.RelationHealtExpertWithPatients do
+  use Ecto.Migration
+
+  def change do
+    alter table("pets") do
+      add :preferred_expert_id, references("healt_expert")
+    end
+  end
+end
+```
+
+```elixir
+defmodule PetClinicMx.PetHealthExpert.Healt do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  schema "healt_expert" do
+    field :age, :integer
+    field :email, :string
+    field :name, :string
+    field :sex, :string
+    field :specialities, :string
+
+    has_many(:patients, PetClinicMx.PetClinicService.Pet, foreign_key: :preferred_expert_id)
+
+    timestamps()
+  end
+
+  @doc false
+  def changeset(healt, attrs) do
+    healt
+    |> cast(attrs, [:name, :age, :email, :specialities, :sex])
+    |> validate_required([:name, :age, :email, :specialities, :sex])
+  end
+end
+```
+```elixir
+defmodule PetClinicMx.PetClinicService.Pet do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  schema "pets" do
+    field :age, :integer
+    field :name, :string
+    field :sex, :string
+    field :type, :string
+
+    belongs_to(:owner, PetClinicMx.OwnerService.Owner, foreign_key: :owner_id)
+    belongs_to(:preferred_expert, PetClinicMx.PetHealthExpert.Healt, foreign_key: :preferred_expert_id)  
+
+    timestamps()
+  end
+
+  @doc false
+  def changeset(pet, attrs) do
+    pet
+    |> cast(attrs, [:name, :age, :type, :sex])
+    |> validate_required([:name, :age, :type, :sex])
+  end
+end
+
+```
+## 6. Asociar preferred_expert con pets (mandar iex + resultado)
+    6.1 Consultar 2 pets con la asociación hacia preferred_expert precargada.
+    ```elixir
+    iex> with_preferred_experd = Repo.all(from p in Pet, where: p.preferred_expert_id > 0, select: [p.name])
+    []
+    ```
+
+    ```elixir
+    iex>  chocolata = Repo.get_by(Pet, name: "chocolata") |> Repo.preload(:preferred_expert)
+    %PetClinicMx.PetClinicService.Pet{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+    age: 1,
+    id: 10,
+    inserted_at: ~N[2022-04-20 23:24:50],
+    name: "chocolata",
+    owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+    owner_id: nil, 
+    preferred_expert: nil,
+    preferred_expert_id: nil,
+    sex: "female",
+    type: "dog",
+    updated_at: ~N[2022-04-20 23:24:50]
+    }
+    ```
+
+    ```elixir
+    iex> phoenix = Repo.get_by(Pet, name: "phoenix") |> Repo.preload(:preferred_expert) 
+    %PetClinicMx.PetClinicService.Pet{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+    age: 4,
+    id: 2,
+    inserted_at: ~N[2022-04-07 22:55:59],
+    name: "phoenix",
+    owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+    owner_id: nil,
+    preferred_expert: nil,
+    preferred_expert_id: nil,
+    sex: "female",
+    type: "cat",
+    updated_at: ~N[2022-04-20 23:59:07]
+    }
+    ```
+
+
+
+    6.2 Usando put_assoc, asociar c/u de esos pets con algún preferred_expert.
+
+
+    ```elixir
+    iex> import Ecto.Changeset
+    Ecto.Changeset
+    ```
+
+    ```elixir
+    iex> phoenix = Repo.get_by(Pet, name: "phoenix") |> Repo.preload(:preferred_expert)
+    iex> erick = Repo.get_by(Healt, name: "Erick")
+    iex> chset = phoenix |> change() |> put_assoc(:preferred_expert, erick)
+    iex> Repo.update(chset)
+    ```
+
+    ```elixir
+    iex> simba = Repo.get_by(Pet, name: "Simba") |> Repo.preload(:preferred_expert)
+    iex> erick = Repo.get_by(Healt, name: "Erick")
+    iex> chset = simba |> change() |> put_assoc(:preferred_expert, erick)
+    iex> Repo.update(chset)
+    ```
+
+    ```elixir
+    iex> leo = Repo.get_by(Pet, name: "Leo") |> Repo.preload(:preferred_expert)
+    iex> erick = Repo.get_by(Healt, name: "Erick")
+    iex> chset = leo |> change() |> put_assoc(:preferred_expert, erick)
+    iex> Repo.update(chset)
+    ```
+
+    ```elixir
+    iex> frog = Repo.get_by(Pet, name: "frog") |> Repo.preload(:preferred_expert)
+    iex> erick = Repo.get_by(Healt, name: "Erick")
+    iex> chset = frog |> change() |> put_assoc(:preferred_expert, erick)
+    iex> Repo.update(chset)
+    ```
+
+    ```elixir
+    iex> lucas = Repo.get_by(Pet, name: "Lucas") |> Repo.preload(:preferred_expert)
+    iex> erick = Repo.get_by(Healt, name: "Erick")
+    iex> chset = lucas |> change() |> put_assoc(:preferred_expert, erick)
+    iex> Repo.update(chset)
+    ```
+
+    ```elixir
+    iex> ecto = Repo.get_by(Pet, name: "ecto") |> Repo.preload(:preferred_expert)
+    iex> pao = Repo.get_by(Healt, name: "Pao")
+    iex> chset = ecto |> change() |> put_assoc(:preferred_expert, pao)
+    iex> Repo.update(chset)
+    ```
+
+
+    ```elixir
+    iex> chocolata = Repo.get_by(Pet, name: "chocolata") |> Repo.preload(:preferred_expert)
+    iex> pao = Repo.get_by(Healt, name: "Pao")
+    iex> chset = chocolata |> change() |> put_assoc(:preferred_expert, pao)
+    iex> Repo.update(chset)
+    ```
+
+    6.3 Consultar el preferred_expert anterior, precargando la asociación con pets.
+
+    ```elixir
+    iex> erick = Repo.get_by(Healt, name: "Erick") |> Repo.preload(:patients)
+    %PetClinicMx.PetHealthExpert.Healt{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "healt_expert">,
+    age: 24,
+    email: "erick.barcenas@gmail.com",
+    id: 1,
+    inserted_at: ~N[2022-04-07 22:58:39],
+    name: "Erick",
+    patients: [
+        %PetClinicMx.PetClinicService.Pet{
+        __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+        age: 4,
+        id: 2,
+        inserted_at: ~N[2022-04-07 22:55:59],
+        name: "phoenix",
+        owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+        owner_id: nil,
+        preferred_expert: #Ecto.Association.NotLoaded<association :preferred_expert is not loaded>,
+        preferred_expert_id: 1,
+        sex: "female",
+        type: "cat",
+        updated_at: ~N[2022-04-21 12:11:13]
+        },
+        %PetClinicMx.PetClinicService.Pet{
+        __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+        age: 5,
+        id: 4,
+        inserted_at: ~N[2022-04-07 22:56:36],
+        name: "Simba",
+        owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+        owner_id: nil,
+        preferred_expert: #Ecto.Association.NotLoaded<association :preferred_expert is not loaded>,
+        preferred_expert_id: 1,
+        sex: "male",
+        type: "snake",
+        updated_at: ~N[2022-04-21 12:13:57]
+        },
+        %PetClinicMx.PetClinicService.Pet{
+        __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+        age: 7,
+        id: 5,
+        inserted_at: ~N[2022-04-07 22:56:58],
+        name: "Leo",
+        owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+        owner_id: nil,
+        preferred_expert: #Ecto.Association.NotLoaded<association :preferred_expert is not loaded>,
+        preferred_expert_id: 1,
+        sex: "male",
+        type: "lizard",
+        updated_at: ~N[2022-04-21 12:14:27]
+        },
+        %PetClinicMx.PetClinicService.Pet{
+        __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+        age: 3,
+        id: 6,
+        inserted_at: ~N[2022-04-07 22:57:13],
+        name: "frog",
+        owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+        owner_id: nil,
+        preferred_expert: #Ecto.Association.NotLoaded<association :preferred_expert is not loaded>,
+        preferred_expert_id: 1,
+        sex: "male",
+        type: "dog",
+        updated_at: ~N[2022-04-21 12:14:43]
+        },
+        %PetClinicMx.PetClinicService.Pet{
+        __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+        age: 3,
+        id: 7,
+        inserted_at: ~N[2022-04-07 22:57:27],
+        name: "Lucas",
+        owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+        owner_id: nil,
+        preferred_expert: #Ecto.Association.NotLoaded<association :preferred_expert is not loaded>,
+        preferred_expert_id: 1,
+        sex: "female",
+        type: "cat",
+        updated_at: ~N[2022-04-21 12:15:00]
+        }
+    ],
+    sex: "male",
+    specialities: "cat",
+    updated_at: ~N[2022-04-07 22:58:39]
+    }
+
+    ```
+
+    ```elixir
+    iex> pao = Repo.get_by(Healt, name: "Pao") |> Repo.preload(:patients)
+    %PetClinicMx.PetHealthExpert.Healt{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "healt_expert">,
+    age: 25,
+    email: "pao@gmail.com",
+    id: 2,
+    inserted_at: ~N[2022-04-07 22:59:01],
+    name: "Pao",
+    patients: [
+        %PetClinicMx.PetClinicService.Pet{
+        __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+        age: 3,
+        id: 9,
+        inserted_at: ~N[2022-04-20 13:29:31],
+        name: "ecto",
+        owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+        owner_id: nil,
+        preferred_expert: #Ecto.Association.NotLoaded<association :preferred_expert is not loaded>,
+        preferred_expert_id: 2,
+        sex: "male",
+        type: "cat",
+        updated_at: ~N[2022-04-21 12:15:25]
+        },
+        %PetClinicMx.PetClinicService.Pet{
+        __meta__: #Ecto.Schema.Metadata<:loaded, "pets">,
+        age: 1,
+        id: 10,
+        inserted_at: ~N[2022-04-20 23:24:50],
+        name: "chocolata",
+        owner: #Ecto.Association.NotLoaded<association :owner is not loaded>,
+        owner_id: nil,
+        preferred_expert: #Ecto.Association.NotLoaded<association :preferred_expert is not loaded>,
+        preferred_expert_id: 2,
+        sex: "female",
+        type: "dog",
+        updated_at: ~N[2022-04-21 12:15:40]
+        }
+    ],
+    sex: "female",
+    specialities: "dog",
+    updated_at: ~N[2022-04-07 22:59:01]
+    }
+    ```
 
 ## 7. Leer la documentación de Ecto.Changeset. La parte principal y las funciones cast y change.
 
 
 ## 8. En Pet.changeset agregar 1 validación para que la edad no sea menor a 0.
 
+```elixir
+def changeset(pet, params \\ %{}) do
+    pet
+    |> cast(params, [:name, :email, :age])
+    |> validate_required([:name, :email, :age])
+    |> validate_format(:email, ~r/@/)
+    |> validate_inclusion(:age, 18..100)
+    |> unique_constraint(:email)
+end
 
+```
 
+```elixir
+iex> Pet.changeset(%Pet{}, %{name: "dolly", type: "dog", age: 0, sex: "female"})  
+#Ecto.Changeset<
+  action: nil,
+  changes: %{age: 0, name: "dolly", sex: "female", type: "dog"},
+  errors: [
+    age: {"must be greater than %{number}",
+     [validation: :number, kind: :greater_than, number: 3]}
+  ],
+  data: #PetClinicMx.PetClinicService.Pet<>,
+  valid?: false
+>
+```
+
+```elixir
+iex> Pet.changeset(%Pet{}, %{name: "dolly", type: "dog", age: 1, sex: "female"})  
+#Ecto.Changeset<
+  action: nil,
+  changes: %{name: "dolly", sex: "female", type: "dog"},
+  errors: [],
+  data: #PetClinicMx.PetClinicService.Pet<>,
+  valid?: true
+>
+```

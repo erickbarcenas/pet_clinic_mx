@@ -9,7 +9,7 @@ defmodule PetClinicMx.PetHealthExpert.Healt do
     field :sex, :string
     field :specialities, :string
 
-    # has_many(:patients, PetClinicMx.PetClinicService.Pet)
+    has_many(:patients, PetClinicMx.PetClinicService.Pet, foreign_key: :preferred_expert_id)
 
     timestamps()
   end
