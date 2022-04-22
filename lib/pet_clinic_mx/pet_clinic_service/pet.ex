@@ -9,7 +9,10 @@ defmodule PetClinicMx.PetClinicService.Pet do
     field :type, :string
 
     belongs_to(:owner, PetClinicMx.OwnerService.Owner, foreign_key: :owner_id)
-    belongs_to(:preferred_expert, PetClinicMx.PetHealthExpert.Healt, foreign_key: :preferred_expert_id)  
+
+    belongs_to(:preferred_expert, PetClinicMx.PetHealthExpert.Healt,
+      foreign_key: :preferred_expert_id
+    )
 
     timestamps()
   end
@@ -21,5 +24,4 @@ defmodule PetClinicMx.PetClinicService.Pet do
     |> validate_required([:name, :age, :type, :sex])
     |> validate_number(:age, greater_than: 3)
   end
-
 end

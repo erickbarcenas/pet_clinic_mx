@@ -7,7 +7,7 @@ defmodule PetClinicMx.OwnerService.Owner do
     field :email, :string
     field :name, :string
     field :phone_num, :string
-    
+
     has_many(:pets, PetClinicMx.PetClinicService.Pet, foreign_key: :owner_id)
 
     timestamps()
@@ -20,5 +20,3 @@ defmodule PetClinicMx.OwnerService.Owner do
     |> validate_required([:name, :age, :email, :phone_num])
   end
 end
-
-

@@ -21,7 +21,12 @@ defmodule PetClinicMx.OwnerServiceTest do
     end
 
     test "create_owner/1 with valid data creates a owner" do
-      valid_attrs = %{age: 42, email: "some email", name: "some name", phone_num: "some phone_num"}
+      valid_attrs = %{
+        age: 42,
+        email: "some email",
+        name: "some name",
+        phone_num: "some phone_num"
+      }
 
       assert {:ok, %Owner{} = owner} = OwnerService.create_owner(valid_attrs)
       assert owner.age == 42
@@ -36,7 +41,13 @@ defmodule PetClinicMx.OwnerServiceTest do
 
     test "update_owner/2 with valid data updates the owner" do
       owner = owner_fixture()
-      update_attrs = %{age: 43, email: "some updated email", name: "some updated name", phone_num: "some updated phone_num"}
+
+      update_attrs = %{
+        age: 43,
+        email: "some updated email",
+        name: "some updated name",
+        phone_num: "some updated phone_num"
+      }
 
       assert {:ok, %Owner{} = owner} = OwnerService.update_owner(owner, update_attrs)
       assert owner.age == 43
