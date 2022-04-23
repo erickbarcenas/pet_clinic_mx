@@ -5,14 +5,13 @@ defmodule PetClinicMx.PetClinicService.Pet do
   schema "pets" do
     field :age, :integer, default: 1
     field :name, :string
-    field :sex, :string
-    field :type, :string
+    field :sex, Ecto.Enum, values: [:male, :female]
+    # field :type, :string
+    belongs_to(:type, PetClinicMx.PetClinicService.PetType)
+
 
     belongs_to(:owner, PetClinicMx.OwnerService.Owner, foreign_key: :owner_id)
-
-    belongs_to(:preferred_expert, PetClinicMx.PetHealthExpert.Healt,
-      foreign_key: :preferred_expert_id
-    )
+    belongs_to(:preferred_expert, PetClinicMx.PetHealthExpert.Healt, foreign_key: :preferred_expert_id)
 
     timestamps()
   end

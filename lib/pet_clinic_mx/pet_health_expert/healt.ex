@@ -6,7 +6,7 @@ defmodule PetClinicMx.PetHealthExpert.Healt do
     field :age, :integer
     field :email, :string
     field :name, :string
-    field :sex, :string
+    field :sex, Ecto.Enum, values: [:male, :female]
     field :specialities, :string
 
     has_many(:patients, PetClinicMx.PetClinicService.Pet, foreign_key: :preferred_expert_id)
