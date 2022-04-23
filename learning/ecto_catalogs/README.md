@@ -487,9 +487,8 @@ UPDATE pets SET type_id = $1::integer WHERE id = $2::integer; [2, 9]
 ## Link a c/u de las migraciones
 
 Migración
-[Example]()	
-Link
-```elixir
-iex>
-```
+[CorrectPetSex](https://github.com/erickbarcenas/pet_clinic_mx/blob/main/priv/repo/migrations/20220423112247_correct_pet_sex.exs)	
+
+[CreatePetTypesTable](https://github.com/erickbarcenas/pet_clinic_mx/blob/main/priv/repo/migrations/20220423121651_create_pet_types_table.exs)	
+
 
