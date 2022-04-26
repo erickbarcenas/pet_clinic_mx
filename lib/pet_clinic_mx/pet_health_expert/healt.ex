@@ -7,9 +7,11 @@ defmodule PetClinicMx.PetHealthExpert.Healt do
     field :email, :string
     field :name, :string
     field :sex, Ecto.Enum, values: [:male, :female]
-    field :specialities, :string
+    # field :specialities, :string
 
     has_many(:patients, PetClinicMx.PetClinicService.Pet, foreign_key: :preferred_expert_id)
+    many_to_many(:specialities, PetClinicMx.PetClinicService.PetType, join_through: PetClinicMx.PetHealthExpert.ExpertSpecialities, 
+                  join_keys: [pet_type_id: :id, healt_expert_id: :id])
 
     timestamps()
   end
