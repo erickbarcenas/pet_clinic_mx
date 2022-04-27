@@ -222,3 +222,18 @@ Compiling 1 file (.ex)
 ```
 
 
+## 4. Crear un servicio AppointmentService con las siguientes funciones:
+
+```elixir
+def available_slots(expert_id, from_date, to_date) do
+    ...
+end
+
+def new_appointment(expert_id, pet_id, datetime) do
+    ...
+end
+```
+
+```elixir
+
+```

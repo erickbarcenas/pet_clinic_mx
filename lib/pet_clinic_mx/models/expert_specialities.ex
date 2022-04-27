@@ -1,4 +1,4 @@
-defmodule PetClinicMx.PetHealthExpert.ExpertSpecialities do
+defmodule PetClinicMx.Models.ExpertSpecialities do
     use Ecto.Schema
     schema "expert_specialities" do
       belongs_to :healt_expert, PetClinicMx.PetHealthExpert.Healt

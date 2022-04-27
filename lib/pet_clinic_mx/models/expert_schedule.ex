@@ -1,4 +1,4 @@
-defmodule PetClinicMx.Services.ExpertSchedule do
+defmodule PetClinicMx.Models.ExpertSchedule do
     use Ecto.Schema
     schema "expert_schedules" do
         field :from_monday, :time

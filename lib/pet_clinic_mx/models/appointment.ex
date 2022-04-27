@@ -1,4 +1,4 @@
-defmodule PetClinicMx.Services.Appointment do
+defmodule PetClinicMx.Models.Appointment do
     use Ecto.Schema
     schema "appointments" do
       field :datetime, :utc_datetime
