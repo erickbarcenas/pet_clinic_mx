@@ -103,19 +103,47 @@ iex> Repo.all(Healt) |> Repo.preload(:specialities)
 
 ## 2. Crear el esquema y migración para Appointment, debe tener los atributos y relaciones mostrados en el diagrama.
 
-
 ```elixir
 defmodule PetClinicMx.Services.Appointment do
     use Ecto.Schema
     schema "appointments" do
+      field :datetime, :utc_datetime
+
       belongs_to :healt_expert, PetClinicMx.PetHealthExpert.Healt
       belongs_to :pet, PetClinicMx.PetClinicService.Pet
-      
-      timestamps()
+      # timestamps()
     end
 end
 
 ```
+
+```elixir
+defmodule PetClinicMx.Repo.Migrations.CreateAppointmentTable do
+  use Ecto.Migration
+
+  def change do
+    create table("appointments") do
+      add :pet_id, references("pets")
+      add :healt_expert_id, references("healt_expert")
+      add :datetime, :utc_datetime
+    end
+  end
+end
+```
+
+```elixir
+iex> mix ecto.migrate
+Compiling 1 file (.ex)
+
+08:53:47.718 [info]  == Running 20220426022402 PetClinicMx.Repo.Migrations.CreateAppointmentTable.change/0 forward
+
+08:53:47.720 [info]  create table appointments
+
+08:53:47.745 [info]  == Migrated 20220426022402 in 0.0s
+
+```
+
+
 
 ```elixir
 iex> mix ecto.gen.migration create_appointment_table
