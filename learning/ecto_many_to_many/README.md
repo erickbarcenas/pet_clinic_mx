@@ -1,6 +1,8 @@
 # Many to many
 
 
+## 1. Cambiar a HealthExpert para que el atributo specialities sea una relación many_to_many hacia PetType. En la migración considarar migrar los datos existentes (asumiendo que están en singular en la columna) y borrar la columna anterior.
+
 ```elixir
 iex> mix ecto.gen.migration create_expert_specialities_table
   Generated pet_clinic_mx app
@@ -98,3 +100,55 @@ iex> Repo.all(Healt) |> Repo.preload(:specialities)
   }
 ]
 ```
+
+## 2. Crear el esquema y migración para Appointment, debe tener los atributos y relaciones mostrados en el diagrama.
+
+
+```elixir
+defmodule PetClinicMx.Services.Appointment do
+    use Ecto.Schema
+    schema "appointments" do
+      belongs_to :healt_expert, PetClinicMx.PetHealthExpert.Healt
+      belongs_to :pet, PetClinicMx.PetClinicService.Pet
+      
+      timestamps()
+    end
+end
+
+```
+
+```elixir
+iex> mix ecto.gen.migration create_appointment_table
+Generated pet_clinic_mx app
+* creating priv/repo/migrations/20220426022402_create_appointment_table.exs
+```
+
+
+## 3. Crear el esquema y migración para ExpertSchedule.  Debe mostrar los días y horarios disponibles del expert, y una relación health_expert hacia HealthExpert. Así mismo, HealthExpert debe tener una relación schedule de tipo has_one hacia ExpertSchedule.
+
+```elixir
+defmodule PetClinicMx.Services.Slots do
+    use Ecto.Schema
+    schema "slots" do
+      field :from_time, :time	
+      field :to_time, :time	
+    end
+end
+```
+
+```elixir
+iex> mix ecto.gen.migration create_slots_table
+```
+
+
+
+```elixir
+
+```
+
+```elixir
+iex> mix ecto.gen.migration create_expert_schedule_table
+
+```
+
+
