@@ -155,28 +155,70 @@ Generated pet_clinic_mx app
 ## 3. Crear el esquema y migración para ExpertSchedule.  Debe mostrar los días y horarios disponibles del expert, y una relación health_expert hacia HealthExpert. Así mismo, HealthExpert debe tener una relación schedule de tipo has_one hacia ExpertSchedule.
 
 ```elixir
-defmodule PetClinicMx.Services.Slots do
+iex> mix ecto.gen.migration create_expert_schedule_table
+Compiling 1 file (.ex)
+* creating priv/repo/migrations/20220427141911_create_expert_schedule_table.exs
+```
+
+
+```elixir
+defmodule PetClinicMx.Services.ExpertSchedule do
     use Ecto.Schema
-    schema "slots" do
-      field :from_time, :time	
-      field :to_time, :time	
+    schema "expert_schedules" do
+        field :from_monday, :time
+        field :to_monday, :time
+        field :from_tuesday, :time
+        field :to_tuesday, :time
+        field :from_wednesday, :time
+        field :to_wednesday, :time
+        field :from_thursday, :time
+        field :to_thursday, :time
+        field :from_friday, :time
+        field :to_friday, :time
+        field :from_saturday, :time
+        field :to_saturday, :time
+        field :from_sunday, :time
+        field :to_sunday, :time
+        
+        belongs_to :healt_expert, PetClinicMx.PetHealthExpert.Healt
     end
+end
+
+```
+
+```elixir
+  def change do
+    create table("expert_schedules") do
+      add :from_monday, :time
+      add :to_monday, :time
+      add :from_tuesday, :time
+      add :to_tuesday, :time
+      add :from_wednesday, :time
+      add :to_wednesday, :time
+      add :from_thursday, :time
+      add :to_thursday, :time
+      add :from_friday, :time
+      add :to_friday, :time
+      add :from_saturday, :time
+      add :to_saturday, :time
+      add :from_sunday, :time
+      add :to_sunday, :time
+
+      add :healt_expert_id, references("healt_expert")
+    end
+  end
 end
 ```
 
 ```elixir
-iex> mix ecto.gen.migration create_slots_table
-```
+iex> mix ecto.migrate
+Compiling 1 file (.ex)
 
+09:21:58.781 [info]  == Running 20220427141911 PetClinicMx.Repo.Migrations.CreateExpertScheduleTable.change/0 forward
 
+09:21:58.783 [info]  create table expert_schedules
 
-```elixir
-
-```
-
-```elixir
-iex> mix ecto.gen.migration create_expert_schedule_table
-
+09:21:58.796 [info]  == Migrated 20220427141911 in 0.0s
 ```
 
 
