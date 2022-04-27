@@ -1,4 +1,4 @@
-defmodule PetClinicMx.OwnerService do
+defmodule PetClinicMx.Serivices.OwnerService do
   @moduledoc """
   The OwnerService context.
   """
@@ -6,7 +6,7 @@ defmodule PetClinicMx.OwnerService do
   import Ecto.Query, warn: false
   alias PetClinicMx.Repo
 
-  alias PetClinicMx.OwnerService.Owner
+  alias PetClinicMx.Models.Owner
 
   @doc """
   Returns the list of owners.

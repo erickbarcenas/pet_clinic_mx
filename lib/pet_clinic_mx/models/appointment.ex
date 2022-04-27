@@ -3,8 +3,8 @@ defmodule PetClinicMx.Models.Appointment do
     schema "appointments" do
       field :datetime, :utc_datetime
 
-      belongs_to :healt_expert, PetClinicMx.PetHealthExpert.Healt
-      belongs_to :pet, PetClinicMx.PetClinicService.Pet
+      belongs_to :healt_expert, PetClinicMx.Models.HealthExpert
+      belongs_to :pet, PetClinicMx.Models.Pet
       # timestamps()
     end
 end

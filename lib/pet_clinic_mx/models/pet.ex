@@ -1,4 +1,4 @@
-defmodule PetClinicMx.PetClinicService.Pet do
+defmodule PetClinicMx.Models.Pet do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -7,11 +7,11 @@ defmodule PetClinicMx.PetClinicService.Pet do
     field :name, :string
     field :sex, Ecto.Enum, values: [:male, :female]
     # field :type, :string
-    belongs_to(:type, PetClinicMx.PetClinicService.PetType)
+    belongs_to(:type, PetClinicMx.Models.PetType)
 
 
-    belongs_to(:owner, PetClinicMx.OwnerService.Owner, foreign_key: :owner_id)
-    belongs_to(:preferred_expert, PetClinicMx.PetHealthExpert.Healt, foreign_key: :preferred_expert_id)
+    belongs_to(:owner, PetClinicMx.Models.Owner, foreign_key: :owner_id)
+    belongs_to(:preferred_expert, PetClinicMx.Models.HealthExpert, foreign_key: :preferred_expert_id)
 
     timestamps()
   end

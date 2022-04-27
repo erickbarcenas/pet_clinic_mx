@@ -1,4 +1,4 @@
-defmodule PetClinicMx.PetHealthExpert.Healt do
+defmodule PetClinicMx.Models.HealthExpert do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -9,10 +9,10 @@ defmodule PetClinicMx.PetHealthExpert.Healt do
     field :sex, Ecto.Enum, values: [:male, :female]
     # field :specialities, :string
 
-    has_many(:patients, PetClinicMx.PetClinicService.Pet, foreign_key: :preferred_expert_id)
-    many_to_many(:specialities, PetClinicMx.PetClinicService.PetType, join_through: PetClinicMx.PetHealthExpert.ExpertSpecialities, 
+    has_many(:patients, PetClinicMx.Models.Pet, foreign_key: :preferred_expert_id)
+    many_to_many(:specialities, PetClinicMx.Models.PetType, join_through: PetClinicMx.Models.ExpertSpecialities, 
                   join_keys: [pet_type_id: :id, healt_expert_id: :id])
-    has_one(:schedule, PetClinicMx.Services.ExpertSchedule)
+    has_one(:schedule, PetClinicMx.Models.ExpertSchedule)
 
     timestamps()
   end

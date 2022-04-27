@@ -1,27 +1,27 @@
 defmodule PetClinicMxWeb.PetController do
   use PetClinicMxWeb, :controller
 
-  alias PetClinicMx.PetClinicService
-  alias PetClinicMx.PetClinicService.Pet
+  alias PetClinicMx.Models.Pet
+  alias PetClinicMx.Services.PetService
 
   def index(conn, _params) do
-    pets = PetClinicService.list_pets()
+    pets = PetService.list_pets()
     render(conn, "index.html", pets: pets)
   end
 
   def index_by_type(conn, params) do
     type = params["type"]
-    pets = PetClinicService.list_pets_by_type(params["type"])
+    pets = PetService.list_pets_by_type(params["type"])
     render(conn, "index_by_type.html", pets: pets, type: type)
   end
 
   def new(conn, _params) do
-    changeset = PetClinicService.change_pet(%Pet{})
+    changeset = PetService.change_pet(%Pet{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"pet" => pet_params}) do
-    case PetClinicService.create_pet(pet_params) do
+    case PetService.create_pet(pet_params) do
       {:ok, pet} ->
         conn
         |> put_flash(:info, "Pet created successfully.")
@@ -33,20 +33,20 @@ defmodule PetClinicMxWeb.PetController do
   end
 
   def show(conn, %{"id" => id}) do
-    pet = PetClinicService.get_pet!(id)
+    pet = PetService.get_pet!(id)
     render(conn, "show.html", pet: pet)
   end
 
   def edit(conn, %{"id" => id}) do
-    pet = PetClinicService.get_pet!(id)
-    changeset = PetClinicService.change_pet(pet)
+    pet = PetService.get_pet!(id)
+    changeset = PetService.change_pet(pet)
     render(conn, "edit.html", pet: pet, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "pet" => pet_params}) do
-    pet = PetClinicService.get_pet!(id)
+    pet = PetService.get_pet!(id)
 
-    case PetClinicService.update_pet(pet, pet_params) do
+    case PetService.update_pet(pet, pet_params) do
       {:ok, pet} ->
         conn
         |> put_flash(:info, "Pet updated successfully.")
@@ -58,8 +58,8 @@ defmodule PetClinicMxWeb.PetController do
   end
 
   def delete(conn, %{"id" => id}) do
-    pet = PetClinicService.get_pet!(id)
-    {:ok, _pet} = PetClinicService.delete_pet(pet)
+    pet = PetService.get_pet!(id)
+    {:ok, _pet} = PetService.delete_pet(pet)
 
     conn
     |> put_flash(:info, "Pet deleted successfully.")

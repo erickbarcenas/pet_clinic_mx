@@ -16,7 +16,7 @@ defmodule PetClinicMx.Models.ExpertSchedule do
         field :from_sunday, :time
         field :to_sunday, :time
         
-        belongs_to :healt_expert, PetClinicMx.PetHealthExpert.Healt
+        belongs_to :healt_expert, PetClinicMx.Models.Healt
     end
 end
 

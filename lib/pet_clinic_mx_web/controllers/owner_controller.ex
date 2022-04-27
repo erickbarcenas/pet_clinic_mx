@@ -1,8 +1,8 @@
 defmodule PetClinicMxWeb.OwnerController do
   use PetClinicMxWeb, :controller
 
-  alias PetClinicMx.OwnerService
-  alias PetClinicMx.OwnerService.Owner
+  alias PetClinicMx.Models.Owner
+  alias PetClinicMx.Services.OwnerService
 
   def index(conn, _params) do
     owners = OwnerService.list_owners()

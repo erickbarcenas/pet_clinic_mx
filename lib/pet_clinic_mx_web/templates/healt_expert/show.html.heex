@@ -3,20 +3,20 @@
       <section class='flexBoxContainer'>
         <div class='leftFlexBox'>
           <div class="nosotros_card">
-            <h3 class="nosotros_card_name"> <%= @healt.name %>, <%= @healt.age %> </h3>
+            <h3 class="nosotros_card_name"> <%= @health_expert.name %>, <%= @health_expert.age %> </h3>
               <img  class={"nosotros_profile"} width="500" height="350" src={"/images/veterinary_symbol.png"} />
 
 
               <div class="container">     
                 <span class="nosotros_card_years_old"></span>
                   <ul class="nosotros_card_skills">
-                    <li> <%= @healt.specialities %> </li>
-                    <li> <%= @healt.sex %> </li>
-                    <li> <%= @healt.email %> </li>
+                    <li> <%= @health_expert.specialities %> </li>
+                    <li> <%= @health_expert.sex %> </li>
+                    <li> <%= @health_expert.email %> </li>
                   </ul>
                   <div class="nosotros_card_description">
-                    <span><%= link "Edit", to: Routes.healt_path(@conn, :edit, @healt) %></span> |
-                    <span><%= link "Back", to: Routes.healt_path(@conn, :index) %></span>
+                    <span><%= link "Edit", to: Routes.health_expert_path(@conn, :edit, @health_expert) %></span> |
+                    <span><%= link "Back", to: Routes.health_expert_path(@conn, :index) %></span>
                   </div>  
                   <%# ---
                   <div class="nosotros_card_description">

@@ -1,0 +1,34 @@
+<h1>Listing Healt expert</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Email</th>
+      <th>Specialities</th>
+      <th>Sex</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for health_expert <- @health_experts do %>
+    <tr>
+      <td><%= health_expert.name %></td>
+      <td><%= health_expert.age %></td>
+      <td><%= health_expert.email %></td>
+      <td><%= health_expert.specialities %></td>
+      <td><%= health_expert.sex %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.health_expert_path(@conn, :show, health_expert) %></span>
+        <span><%= link "Edit", to: Routes.health_expert_path(@conn, :edit, health_expert) %></span>
+        <span><%= link "Delete", to: Routes.health_expert_path(@conn, :delete, health_expert), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Healt Expert", to: Routes.health_expert_path(@conn, :new) %></span>

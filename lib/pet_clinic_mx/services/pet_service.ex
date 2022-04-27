@@ -1,4 +1,4 @@
-defmodule PetClinicMx.PetClinicService do
+defmodule PetClinicMx.Services.PetService do
   @moduledoc """
   The PetClinicService context.
   """
@@ -6,7 +6,7 @@ defmodule PetClinicMx.PetClinicService do
   import Ecto.Query, warn: false
   alias PetClinicMx.Repo
 
-  alias PetClinicMx.PetClinicService.Pet
+  alias PetClinicMx.Models.Pet
 
   @doc """
   Returns the list of pets.

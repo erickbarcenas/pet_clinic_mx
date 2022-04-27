@@ -1,4 +1,4 @@
-defmodule PetClinicMx.OwnerService.Owner do
+defmodule PetClinicMx.Models.Owner do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -8,7 +8,7 @@ defmodule PetClinicMx.OwnerService.Owner do
     field :name, :string
     field :phone_num, :string
 
-    has_many(:pets, PetClinicMx.PetClinicService.Pet, foreign_key: :owner_id)
+    has_many(:pets, PetClinicMx.Models.Pet, foreign_key: :owner_id)
 
     timestamps()
   end
