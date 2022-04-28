@@ -8,7 +8,6 @@ defmodule PetClinicMx.Repo.Migrations.CreateExpertSpecialitiesTable do
   # migrar los datos de la tabla de healt expert especialities
   # después de migrarlos borrar la columna
   # specialities no sea un string sino relación many to many hacia pet type
-  
 
   def change do
     # Nota: si se hace esto significa que del esquema trae una relación
@@ -18,8 +17,9 @@ defmodule PetClinicMx.Repo.Migrations.CreateExpertSpecialitiesTable do
     # 1. Se selecciona el id y el type de todos los pets registrados
     query = "SELECT healt_expert.id, healt_expert.specialities FROM healt_expert;"
     res = Ecto.Adapters.SQL.query!(Repo, query, [])
-    all_experts = res.rows # regresa una columna
-    
+    # regresa una columna
+    all_experts = res.rows
+
     alter table("healt_expert") do
       remove :specialities
     end
@@ -38,11 +38,11 @@ defmodule PetClinicMx.Repo.Migrations.CreateExpertSpecialitiesTable do
     all_experts
     |> Enum.each(fn expert ->
       expert_id = Enum.at(expert, 0)
-      specialities = Enum.at(expert, 1) |> String.split([" ", ","], trim: true) 
+      specialities = Enum.at(expert, 1) |> String.split([" ", ","], trim: true)
 
       specialities
-      |> Enum.each(fn speciality ->  
-        %PetType{ id: type_id } = Repo.get_by(PetType, name: speciality)
+      |> Enum.each(fn speciality ->
+        %PetType{id: type_id} = Repo.get_by(PetType, name: speciality)
         insert = "INSERT INTO expert_specialities (healt_expert_id, pet_type_id)
                   VALUES ($1::integer, $2::integer);"
 

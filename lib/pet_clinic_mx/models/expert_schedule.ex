@@ -1,24 +1,20 @@
 defmodule PetClinicMx.Models.ExpertSchedule do
-    use Ecto.Schema
-    schema "expert_schedules" do
-        field :from_monday, :time
-        field :to_monday, :time
-        field :from_tuesday, :time
-        field :to_tuesday, :time
-        field :from_wednesday, :time
-        field :to_wednesday, :time
-        field :from_thursday, :time
-        field :to_thursday, :time
-        field :from_friday, :time
-        field :to_friday, :time
-        field :from_saturday, :time
-        field :to_saturday, :time
-        field :from_sunday, :time
-        field :to_sunday, :time
-        
-        belongs_to :healt_expert, PetClinicMx.Models.Healt
-    end
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  schema "expert_schedules" do
+    field :start_date, :date
+    field :ending_date, :date
+    field :start_hour, :time
+    field :ending_hour, :time
+    belongs_to :healt_expert, PetClinicMx.Models.HealthExpert
+    timestamps()
+  end
+
+  @doc false
+  def changeset(schedule, params) do
+    schedule
+    |> cast(params, [:healt_expert_id, :start_date, :ending_date, :start_hour, :ending_hour])
+    |> validate_required([:healt_expert_id, :start_date, :ending_date, :start_hour, :ending_hour])
+  end
 end
-
-
-

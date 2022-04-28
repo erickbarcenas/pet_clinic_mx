@@ -9,9 +9,11 @@ defmodule PetClinicMx.Models.Pet do
     # field :type, :string
     belongs_to(:type, PetClinicMx.Models.PetType)
 
-
     belongs_to(:owner, PetClinicMx.Models.Owner, foreign_key: :owner_id)
-    belongs_to(:preferred_expert, PetClinicMx.Models.HealthExpert, foreign_key: :preferred_expert_id)
+
+    belongs_to(:preferred_expert, PetClinicMx.Models.HealthExpert,
+      foreign_key: :preferred_expert_id
+    )
 
     timestamps()
   end

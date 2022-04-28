@@ -235,5 +235,28 @@ end
 ```
 
 ```elixir
-
+iex> AppointmentService.available_slots(1, ~D[2022-04-26], ~D[2022-04-29])
+{:ok,
+ %{
+   ~D[2022-04-28] => [~T[10:00:00], ~T[10:30:00], ~T[11:00:00], ~T[11:30:00],
+    ~T[12:00:00], ~T[12:30:00], ~T[13:00:00], ~T[13:30:00], ~T[14:00:00],
+    ~T[14:30:00], ~T[15:00:00], ~T[15:30:00], ~T[16:00:00], ~T[16:30:00],
+    ~T[17:00:00], ~T[17:30:00], ~T[18:00:00], ~T[18:30:00], ~T[19:00:00],
+    ~T[19:30:00]]
+ }}
+```
+```elixir
+iex> AppointmentService.new_appointment(1, 2, ~N[2022-04-26 15:00:00])
+{:ok,
+ %PetClinicMx.Models.Appointment{
+   __meta__: #Ecto.Schema.Metadata<:loaded, "appointments">,
+   datetime: ~U[2022-04-26 15:00:00Z],
+   healt_expert: #Ecto.Association.NotLoaded<association :healt_expert is not loaded>,
+   healt_expert_id: 1,
+   id: 1,
+   inserted_at: ~N[2022-04-28 17:24:25],
+   pet: #Ecto.Association.NotLoaded<association :pet is not loaded>,
+   pet_id: 1,
+   updated_at: ~N[2022-04-28 17:24:25]
+ }}
 ```

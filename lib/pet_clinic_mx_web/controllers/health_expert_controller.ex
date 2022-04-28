@@ -32,7 +32,7 @@ defmodule PetClinicMxWeb.HealthExpertController do
   end
 
   def edit(conn, %{"id" => id}) do
-    health_expert = HealthExpertService.get_health_expert(id)
+    health_expert = HealthExpertService.get_health_expert!(id)
     changeset = HealthExpertService.change_health_expert(health_expert)
     render(conn, "edit.html", health_expert: health_expert, changeset: changeset)
   end
