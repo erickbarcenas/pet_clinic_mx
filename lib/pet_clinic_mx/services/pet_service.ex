@@ -19,6 +19,7 @@ defmodule PetClinicMx.Services.PetService do
   """
   def list_pets do
     Repo.all(Pet)
+    |> Repo.preload(:type)
   end
 
   @doc """
@@ -45,7 +46,10 @@ defmodule PetClinicMx.Services.PetService do
       ** (Ecto.NoResultsError)
 
   """
-  def get_pet!(id), do: Repo.get!(Pet, id)
+  def get_pet!(id), do: Repo.get!(Pet, id) 
+  |> Repo.preload(:type)
+  # |> Repo.preload(:owner)
+  
 
   @doc """
   Creates a pet.
