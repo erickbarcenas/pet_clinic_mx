@@ -26,6 +26,26 @@ Snake list screen
 ![Snake list screen](https://cdn.discordapp.com/attachments/954764763739586630/961779270978519090/unknown.png)
 
 
+### Part 3
+Listing Healt expert
+![Listing Healt expert](https://github.com/erickbarcenas/pet_clinic_mx/blob/main/assets/imgs/readme/Helat_experts.jpeg)
+
+
+### Part 4
+Show Healt expert
+![Show Healt expert](https://github.com/erickbarcenas/pet_clinic_mx/blob/main/assets/imgs/readme/show_healt_expert.jpeg)
+
+
+### Part 5
+Edit Healt expert
+![Edit Healt expert](https://github.com/erickbarcenas/pet_clinic_mx/blob/main/assets/imgs/readme/edit_healt_expert.jpeg)
+
+### Part 6
+Appointments
+![appointments](https://github.com/erickbarcenas/pet_clinic_mx/blob/main/assets/imgs/readme/appointments.jpeg)
+
+
+
 ## Ecto basic operations
 
 ```elixir
