@@ -44,7 +44,8 @@ defmodule PetClinicMxWeb.PetController do
   def edit(conn, %{"id" => id}) do
     pet = PetService.get_pet!(id)
     changeset = PetService.change_pet(pet)
-    render(conn, "edit.html", pet: pet, changeset: changeset)
+    pet_types = PetService.list_pet_types()
+    render(conn, "edit.html", pet: pet, pet_types: pet_types, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "pet" => pet_params}) do

@@ -7,6 +7,7 @@ defmodule PetClinicMx.Services.PetService do
   alias PetClinicMx.Repo
 
   alias PetClinicMx.Models.Pet
+  alias PetClinicMx.Models.PetType
 
   @doc """
   Returns the list of pets.
@@ -114,5 +115,10 @@ defmodule PetClinicMx.Services.PetService do
   """
   def change_pet(%Pet{} = pet, attrs \\ %{}) do
     Pet.changeset(pet, attrs)
+  end
+
+
+  def list_pet_types() do
+    Repo.all(PetType)
   end
 end
