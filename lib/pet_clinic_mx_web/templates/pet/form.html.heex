@@ -25,9 +25,9 @@
   <%= select f, :owner_id, Enum.map(@owners, fn o -> {o.name, o.id} end) %>
   <%= error_tag f, :owner_id %>
 
-  <%= label f, :healt_expert_id %>
-  <%= select f, :healt_expert_id, Enum.map(@health_experts, fn h_e -> {h_e.name, h_e.id} end) %>
-  <%= error_tag f, :healt_expert_id %>
+  <%= label f, :preferred_expert_id %>
+  <%= select f, :preferred_expert_id, Enum.map(@health_experts, fn h_e -> {h_e.name, h_e.id} end) %>
+  <%= error_tag f, :preferred_expert_id %>
 
   <div>
     <%= submit "Save" %>

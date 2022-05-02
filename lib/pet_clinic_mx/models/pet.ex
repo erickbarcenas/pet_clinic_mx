@@ -21,8 +21,8 @@ defmodule PetClinicMx.Models.Pet do
   @doc false
   def changeset(pet, attrs) do
     pet
-    |> cast(attrs, [:name, :age, :type_id, :sex])
-    |> validate_required([:name, :age, :type_id, :sex])
+    |> cast(attrs, [:name, :age, :type_id, :sex, :owner_id, :preferred_expert_id])
+    |> validate_required([:name, :age, :type_id, :sex, :owner_id, :preferred_expert_id])
     |> validate_number(:age, greater_than: 0)
   end
 end
