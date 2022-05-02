@@ -19,6 +19,7 @@ defmodule PetClinicMx.Services.HealthExpertService do
   """
   def list_health_experts do
     Repo.all(HealthExpert)
+    |> Repo.preload(:specialities)
   end
 
   @doc """
@@ -35,7 +36,7 @@ defmodule PetClinicMx.Services.HealthExpertService do
       ** (Ecto.NoResultsError)
 
   """
-  def get_health_expert!(id), do: Repo.get!(HealthExpert, id)
+  def get_health_expert!(id), do: Repo.get!(HealthExpert, id) |> Repo.preload(:specialities)
 
   @doc """
   Creates a health_expert.

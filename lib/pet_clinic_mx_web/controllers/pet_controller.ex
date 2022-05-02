@@ -22,7 +22,13 @@ defmodule PetClinicMxWeb.PetController do
     pet_types = PetService.list_pet_types()
     owners = PetService.list_owners()
     health_experts = PetService.list_health_experts()
-    render(conn, "new.html", pet_types: pet_types, owners: owners, health_experts: health_experts, changeset: changeset)
+    render(
+      conn, "new.html", 
+      pet_types: pet_types,
+      owners: owners, 
+      health_experts: health_experts, 
+      changeset: changeset
+      )
   end
 
   def create(conn, %{"pet" => pet_params}) do

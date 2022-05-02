@@ -10,7 +10,16 @@
               <div class="container">     
                 <span class="nosotros_card_years_old"></span>
                   <ul class="nosotros_card_skills">
-                    <li> <%= @health_expert.specialities %> </li>
+                    <li> 
+                      <ul>
+                        <li>
+                          <%= @health_expert.specialities
+                              |> Enum.map(fn s -> s.name <> " " end)
+                            %>
+                        </li>
+                      </ul>
+                    
+                    </li>
                     <li> <%= @health_expert.sex %> </li>
                     <li> <%= @health_expert.email %> </li>
                   </ul>

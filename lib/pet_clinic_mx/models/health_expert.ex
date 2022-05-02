@@ -24,7 +24,8 @@ defmodule PetClinicMx.Models.HealthExpert do
   @doc false
   def changeset(healt, attrs) do
     healt
-    |> cast(attrs, [:name, :age, :email, :specialities, :sex])
-    |> validate_required([:name, :age, :email, :specialities, :sex])
+    |> cast(attrs, [:name, :age, :email, :sex])
+    |> validate_required([:name, :age, :email, :sex])
+    # |> put_specialities(attrs)
   end
 end
