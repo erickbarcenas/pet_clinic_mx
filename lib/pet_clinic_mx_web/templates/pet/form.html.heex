@@ -15,11 +15,19 @@
 
   <%= label f, :type_id %>
   <%= select f, :type_id, Enum.map(@pet_types, fn pt -> {pt.name, pt.id} end) %>
-  <%= error_tag f, :type %>
+  <%= error_tag f, :type_id %>
 
   <%= label f, :sex %>
   <%= select f, :sex, ["female", "male"] %>
   <%= error_tag f, :sex %>
+
+  <%= label f, :owner_id %>
+  <%= select f, :owner_id, Enum.map(@owners, fn o -> {o.name, o.id} end) %>
+  <%= error_tag f, :owner_id %>
+
+  <%= label f, :healt_expert_id %>
+  <%= select f, :healt_expert_id, Enum.map(@health_experts, fn h_e -> {h_e.name, h_e.id} end) %>
+  <%= error_tag f, :healt_expert_id %>
 
   <div>
     <%= submit "Save" %>

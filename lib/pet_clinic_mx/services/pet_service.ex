@@ -8,6 +8,9 @@ defmodule PetClinicMx.Services.PetService do
 
   alias PetClinicMx.Models.Pet
   alias PetClinicMx.Models.PetType
+  alias PetClinicMx.Models.Owner
+  alias PetClinicMx.Models.HealthExpert
+
 
   @doc """
   Returns the list of pets.
@@ -120,5 +123,13 @@ defmodule PetClinicMx.Services.PetService do
 
   def list_pet_types() do
     Repo.all(PetType)
+  end
+
+  def list_owners() do
+    Repo.all(Owner)
+  end
+
+  def list_health_experts() do
+    Repo.all(HealthExpert)
   end
 end
