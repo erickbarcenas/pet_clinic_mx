@@ -23,6 +23,6 @@ defmodule PetClinicMx.Models.Pet do
     pet
     |> cast(attrs, [:name, :age, :type_id, :sex])
     |> validate_required([:name, :age, :type_id, :sex])
-    |> validate_number(:age, greater_than: 3)
+    |> validate_number(:age, greater_than: 0)
   end
 end
