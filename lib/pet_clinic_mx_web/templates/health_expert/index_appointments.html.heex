@@ -1,0 +1,19 @@
+<h1> Appointments</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Patient</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for appointment <- @appointments do %>
+        <tr>
+        <td><%= DateTime.to_date(appointment.datetime) %></td>
+        <td><%= DateTime.to_time(appointment.datetime) %></td>
+        <td><%= appointment.pet.name %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

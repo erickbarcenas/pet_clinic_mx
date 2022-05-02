@@ -1,6 +1,7 @@
 defmodule PetClinicMx.Models.HealthExpert do
   use Ecto.Schema
   import Ecto.Changeset
+  alias PetClinicMx.Models.{ExpertSpecialities, Appointment, ExpertSchedule, PetType, Pet}
 
   schema "healt_expert" do
     field :age, :integer
@@ -9,14 +10,14 @@ defmodule PetClinicMx.Models.HealthExpert do
     field :sex, Ecto.Enum, values: [:male, :female]
     # field :specialities, :string
 
-    has_many(:patients, PetClinicMx.Models.Pet, foreign_key: :preferred_expert_id)
+    has_many(:patients, Pet, foreign_key: :preferred_expert_id)
 
-    many_to_many(:specialities, PetClinicMx.Models.PetType,
-      join_through: PetClinicMx.Models.ExpertSpecialities,
+    many_to_many(:specialities, PetType,
+      join_through: ExpertSpecialities,
       join_keys: [pet_type_id: :id, healt_expert_id: :id]
     )
-
-    has_one(:schedule, PetClinicMx.Models.ExpertSchedule)
+    has_many(:appointments, Appointment, foreign_key: :healt_expert_id)
+    has_one(:schedule, ExpertSchedule)
 
     timestamps()
   end

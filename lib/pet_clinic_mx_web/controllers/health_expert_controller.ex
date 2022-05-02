@@ -15,21 +15,18 @@ defmodule PetClinicMxWeb.HealthExpertController do
     date = Date.from_iso8601!(date)
     
     appointments =
-    PetClinicService.get_pet_health_expert!(
-      id,
-      preloads: [appointments: :pet]
-    )
-    |> Map.get(:appointments)
-    |> Enum.filter(fn a ->
-      a.datetime
-      |> DateTime.to_date()
-      |> Date.compare(date)
-      |> case do
-        :eq -> true
-        _ -> false
-      end
-    end)
-  render(conn, "show_appointments.html", appointments: appointments)
+      HealthExpertService.get_pet_health_expert!(id, preloads: [appointments: :pet])
+      |> Map.get(:appointments)
+      |> Enum.filter(fn a ->
+        a.datetime
+        |> DateTime.to_date()
+        |> Date.compare(date)
+        |> case do
+          :eq -> true
+          _ -> false
+        end
+      end)
+  render(conn, "index_appointments.html", appointments: appointments)
 end
 
   def new(conn, _params) do

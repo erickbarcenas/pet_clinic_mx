@@ -23,7 +23,7 @@ defmodule PetClinicMxWeb.Router do
     get(
       "/health_experts/:id/schedule",
       HealthExpertController,
-      :appointments
+      :index_appointments
     )
     resources "/pets", PetController
     resources "/health_experts", HealthExpertController
