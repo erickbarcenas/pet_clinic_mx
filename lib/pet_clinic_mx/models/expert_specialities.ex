@@ -1,4 +1,7 @@
 defmodule PetClinicMx.Models.ExpertSpecialities do
+  @moduledoc """
+    model for the specialties of a health expert
+  """
   use Ecto.Schema
 
   schema "expert_specialities" do

@@ -13,7 +13,7 @@ mix credo -a
 ```
 mix credo -a
 ```
-![Credo]()
+![Credo](https://github.com/erickbarcenas/pet_clinic_mx/blob/main/test/assets/credo_solved.jpeg)
 
 ## Referencia
 

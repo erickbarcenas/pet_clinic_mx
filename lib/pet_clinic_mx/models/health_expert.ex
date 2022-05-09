@@ -1,4 +1,7 @@
 defmodule PetClinicMx.Models.HealthExpert do
+  @moduledoc """
+    model for a health expert
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias PetClinicMx.Models.{ExpertSpecialities, Appointment, ExpertSchedule, PetType, Pet}

@@ -1,4 +1,7 @@
 defmodule PetClinicMx.Models.Appointment do
+  @moduledoc """
+    health expert dating model
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias PetClinicMx.Repo

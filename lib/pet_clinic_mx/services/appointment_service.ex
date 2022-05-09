@@ -45,7 +45,7 @@ defmodule PetClinicMx.Services.AppointmentService do
 
     with {:ok, slots} <- available_slots(expert_id, date, date) do
       if NaiveDateTime.to_time(datetime) in Map.get(slots, date, []) do
-        if not is_nil(Repo.get(Pet, pet_id)) do
+        if is_nil(Repo.get(Pet, pet_id)) == false do
           %Appointment{}
           |> Appointment.changeset(%{
             healt_expert_id: expert_id,

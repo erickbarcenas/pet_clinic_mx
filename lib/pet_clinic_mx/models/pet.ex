@@ -1,4 +1,7 @@
 defmodule PetClinicMx.Models.Pet do
+  @moduledoc """
+    model for a pet
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

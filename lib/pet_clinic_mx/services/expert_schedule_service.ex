@@ -1,4 +1,6 @@
 defmodule PetClinicMx.Services.ExpertScheduleService do
+  @moduledoc false
+
   import Ecto.Query
   alias PetClinicMx.Repo
   alias PetClinicMx.Models.ExpertSchedule

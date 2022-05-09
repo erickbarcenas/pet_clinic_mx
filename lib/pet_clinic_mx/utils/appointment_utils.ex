@@ -1,4 +1,5 @@
 defmodule PetClinicMx.Utils.AppointmentUtils do
+  @moduledoc false
   def create_time_interval([head | _] = acc, ending_hour, offset) do
     new_time = Time.add(head, offset)
 
