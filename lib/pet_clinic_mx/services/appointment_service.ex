@@ -41,15 +41,17 @@ defmodule PetClinicMx.Services.AppointmentService do
 
   # query = Repo.get(Pet, pet_id)
   def new_appointment(expert_id, pet_id, datetime) do
-
     date = NaiveDateTime.to_date(datetime)
 
-
     with {:ok, slots} <- available_slots(expert_id, date, date) do
-      if  NaiveDateTime.to_time(datetime) in Map.get(slots, date, []) do
+      if NaiveDateTime.to_time(datetime) in Map.get(slots, date, []) do
         if not is_nil(Repo.get(Pet, pet_id)) do
           %Appointment{}
-          |> Appointment.changeset(%{healt_expert_id: expert_id, pet_id: pet_id, datetime: datetime})
+          |> Appointment.changeset(%{
+            healt_expert_id: expert_id,
+            pet_id: pet_id,
+            datetime: datetime
+          })
           |> Repo.insert()
         else
           {:error, "Invalid pet id!"}

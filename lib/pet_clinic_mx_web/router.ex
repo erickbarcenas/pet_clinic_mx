@@ -20,11 +20,13 @@ defmodule PetClinicMxWeb.Router do
     get "/", PageController, :index
 
     get "/pets/by_type/:type", PetController, :index_by_type
+
     get(
       "/health_experts/:id/schedule",
       HealthExpertController,
       :index_appointments
     )
+
     resources "/pets", PetController
     resources "/health_experts", HealthExpertController
     resources "/owners", OwnerController

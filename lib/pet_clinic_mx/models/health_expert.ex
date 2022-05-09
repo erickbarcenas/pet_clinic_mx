@@ -16,6 +16,7 @@ defmodule PetClinicMx.Models.HealthExpert do
       join_through: ExpertSpecialities,
       join_keys: [pet_type_id: :id, healt_expert_id: :id]
     )
+
     has_many(:appointments, Appointment, foreign_key: :healt_expert_id)
     has_one(:schedule, ExpertSchedule)
 
@@ -27,6 +28,7 @@ defmodule PetClinicMx.Models.HealthExpert do
     healt
     |> cast(attrs, [:name, :age, :email, :sex])
     |> validate_required([:name, :age, :email, :sex])
+
     # |> put_specialities(attrs)
   end
 end

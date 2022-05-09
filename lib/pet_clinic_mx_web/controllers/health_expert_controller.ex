@@ -4,7 +4,6 @@ defmodule PetClinicMxWeb.HealthExpertController do
   alias PetClinicMx.Models.HealthExpert
   alias PetClinicMx.Services.HealthExpertService
   alias PetClinicMx.Services.PetService
-  
 
   def index(conn, _params) do
     health_experts = HealthExpertService.list_health_experts()
@@ -13,7 +12,7 @@ defmodule PetClinicMxWeb.HealthExpertController do
 
   def index_appointments(conn, %{"id" => id, "date" => date}) do
     date = Date.from_iso8601!(date)
-    
+
     appointments =
       HealthExpertService.get_pet_health_expert!(id, preloads: [appointments: :pet])
       |> Map.get(:appointments)
@@ -26,8 +25,9 @@ defmodule PetClinicMxWeb.HealthExpertController do
           _ -> false
         end
       end)
-  render(conn, "index_appointments.html", appointments: appointments)
-end
+
+    render(conn, "index_appointments.html", appointments: appointments)
+  end
 
   def new(conn, _params) do
     changeset = HealthExpertService.change_health_expert(%HealthExpert{})
@@ -36,9 +36,8 @@ end
   end
 
   def create(conn, %{"health_expert" => health_expert_params}) do
-
     pet_types = PetService.list_pet_types()
-      
+
     case HealthExpertService.create_health_expert(health_expert_params) do
       {:ok, health_expert} ->
         conn
@@ -55,14 +54,17 @@ end
     render(conn, "show.html", health_expert: health_expert)
   end
 
-
-
   def edit(conn, %{"id" => id}) do
     health_expert = HealthExpertService.get_health_expert!(id)
     pet_types = PetService.list_pet_types()
 
     changeset = HealthExpertService.change_health_expert(health_expert)
-    render(conn, "edit.html", health_expert: health_expert, pet_types: pet_types, changeset: changeset)
+
+    render(conn, "edit.html",
+      health_expert: health_expert,
+      pet_types: pet_types,
+      changeset: changeset
+    )
   end
 
   def update(conn, %{"id" => id, "health_expert" => health_expert_params}) do
@@ -76,7 +78,11 @@ end
         |> redirect(to: Routes.health_expert_path(conn, :show, health_expert))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", health_expert: health_expert, pet_types: pet_types, changeset: changeset)
+        render(conn, "edit.html",
+          health_expert: health_expert,
+          pet_types: pet_types,
+          changeset: changeset
+        )
     end
   end
 

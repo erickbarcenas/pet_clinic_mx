@@ -11,7 +11,6 @@ defmodule PetClinicMx.Services.PetService do
   alias PetClinicMx.Models.Owner
   alias PetClinicMx.Models.HealthExpert
 
-
   @doc """
   Returns the list of pets.
 
@@ -50,10 +49,12 @@ defmodule PetClinicMx.Services.PetService do
       ** (Ecto.NoResultsError)
 
   """
-  def get_pet!(id), do: Repo.get!(Pet, id) 
-  |> Repo.preload(:type)
+  def get_pet!(id),
+    do:
+      Repo.get!(Pet, id)
+      |> Repo.preload(:type)
+
   # |> Repo.preload(:owner)
-  
 
   @doc """
   Creates a pet.
@@ -119,7 +120,6 @@ defmodule PetClinicMx.Services.PetService do
   def change_pet(%Pet{} = pet, attrs \\ %{}) do
     Pet.changeset(pet, attrs)
   end
-
 
   def list_pet_types() do
     Repo.all(PetType)

@@ -260,3 +260,70 @@ iex> AppointmentService.new_appointment(1, 2, ~N[2022-04-26 15:00:00])
    updated_at: ~N[2022-04-28 17:24:25]
  }}
 ```
+
+
+
+```elixir
+iex> scheduele = %{
+  healt_expert_id: 2, 
+  start_date: ~D[2022-05-01], 
+  ending_date: ~D[2022-05-11], 
+  start_hour: ~T[18:00:00], ending_hour: ~T[18:00:00]
+}
+
+{:ok,
+ %PetClinicMx.Models.ExpertSchedule{
+   __meta__: #Ecto.Schema.Metadata<:loaded, "expert_schedules">,
+   ending_date: ~D[2022-05-11],
+   ending_hour: ~T[18:00:00],
+   healt_expert: #Ecto.Association.NotLoaded<association :healt_expert is not loaded>,
+   healt_expert_id: 2,
+   id: 2,
+   inserted_at: ~N[2022-05-02 17:48:04],
+   start_date: ~D[2022-05-01],
+   start_hour: ~T[18:00:00],
+   updated_at: ~N[2022-05-02 17:48:04]
+ }}
+
+```
+
+
+```elixir
+iex> alias PetClinicMx.Models.ExpertSchedule
+PetClinicMx.Models.ExpertSchedule
+```
+
+
+
+```elixir
+iex()> Repo.all(ExpertSchedule) 
+[
+  %PetClinicMx.Models.ExpertSchedule{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "expert_schedules">,
+    ending_date: ~D[2022-04-28],
+    ending_hour: ~T[20:00:00],
+    healt_expert: #Ecto.Association.NotLoaded<association :healt_expert is not loaded>,
+    healt_expert_id: 1,
+    id: 1,
+    inserted_at: ~N[2022-04-28 02:45:42],
+    start_date: ~D[2022-04-28],
+    start_hour: ~T[10:00:00],
+    updated_at: ~N[2022-04-28 02:45:42]
+  },
+  %PetClinicMx.Models.ExpertSchedule{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "expert_schedules">,
+    ending_date: ~D[2022-05-11],
+    ending_hour: ~T[18:00:00],
+    healt_expert: #Ecto.Association.NotLoaded<association :healt_expert is not loaded>,
+    healt_expert_id: 2,
+    id: 2,
+    inserted_at: ~N[2022-05-02 17:48:04],
+    start_date: ~D[2022-05-01],
+    start_hour: ~T[18:00:00],
+    updated_at: ~N[2022-05-02 17:48:04]
+  }
+]
+
+```
+
+AppointmentService.new_appointment(2, 1, ~N[2022-04-28 15:00:00])

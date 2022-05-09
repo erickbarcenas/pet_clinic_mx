@@ -37,12 +37,11 @@ defmodule PetClinicMx.Services.HealthExpertService do
 
   """
   def get_health_expert!(id), do: Repo.get!(HealthExpert, id) |> Repo.preload(:specialities)
-  
+
   def get_pet_health_expert!(id, preloads: preloads_list) do
     Repo.get!(HealthExpert, id)
     |> Repo.preload(preloads_list)
   end
-
 
   @doc """
   Creates a health_expert.

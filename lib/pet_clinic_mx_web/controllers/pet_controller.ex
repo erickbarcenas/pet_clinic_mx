@@ -4,7 +4,7 @@ defmodule PetClinicMxWeb.PetController do
   alias PetClinicMx.Models.Pet
   alias PetClinicMx.Services.PetService
   alias PetClinicMx.Serivices.OwnerService
-  alias PetClinicMx.Services.HealthExpertService 
+  alias PetClinicMx.Services.HealthExpertService
 
   def index(conn, _params) do
     pets = PetService.list_pets()
@@ -22,13 +22,15 @@ defmodule PetClinicMxWeb.PetController do
     pet_types = PetService.list_pet_types()
     owners = PetService.list_owners()
     health_experts = PetService.list_health_experts()
+
     render(
-      conn, "new.html", 
+      conn,
+      "new.html",
       pet_types: pet_types,
-      owners: owners, 
-      health_experts: health_experts, 
+      owners: owners,
+      health_experts: health_experts,
       changeset: changeset
-      )
+    )
   end
 
   def create(conn, %{"pet" => pet_params}) do
@@ -45,8 +47,10 @@ defmodule PetClinicMxWeb.PetController do
 
   def show(conn, %{"id" => id}) do
     pet = PetService.get_pet!(id)
-    owner = OwnerService.get_owner!(pet.owner_id) # 
-    expert = HealthExpertService.get_health_expert!(pet.preferred_expert_id) # 
+    # 
+    owner = OwnerService.get_owner!(pet.owner_id)
+    # 
+    expert = HealthExpertService.get_health_expert!(pet.preferred_expert_id)
     render(conn, "show.html", pet: pet, owner: owner, expert: expert)
   end
 
